@@ -6,9 +6,13 @@ package controller;
 
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import model.Veiculo;
+import org.hibernate.HibernateException;
 import view.*;
 
 /**
@@ -91,6 +95,17 @@ public class GerInterGrafica {
     public void sair() {
         frmPrinc.dispose();
     }
+    
+    public void carregarCombo( Class classe, JComboBox combo) {
+        List lista;
+        try {
+            lista = gerDom.listar(classe);
+            combo.setModel( new DefaultComboBoxModel( lista.toArray() )  );
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(frmPrinc, ex.getMessage() );
+        }        
+    }
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

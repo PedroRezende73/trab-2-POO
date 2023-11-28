@@ -105,4 +105,9 @@ public class Funcionario implements Serializable{
     public String getComplemento() {
         return complemento;
     }
+    
+    @Override
+    public String toString(){
+        return nome;
+    }
 }

@@ -78,4 +78,9 @@ public class Servico implements Serializable {
         return valor;
     }
     
+    @Override
+    public String toString(){
+        return nome;
+    }
+    
 }

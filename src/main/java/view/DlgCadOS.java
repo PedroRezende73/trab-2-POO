@@ -6,8 +6,8 @@ package view;
 
 import controller.GerInterGrafica;
 import controller.ItemOrdemTableModel;
-import java.text.ParseException;
-import javax.swing.JOptionPane;
+import model.Funcionario;
+import model.Servico;
 import model.Veiculo;
 
 /**
@@ -41,7 +41,7 @@ public class DlgCadOS extends javax.swing.JDialog {
         txtPlaca = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbFuncionario = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -49,10 +49,11 @@ public class DlgCadOS extends javax.swing.JDialog {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbServico = new javax.swing.JComboBox<>();
         btnAdicionar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
@@ -61,6 +62,11 @@ public class DlgCadOS extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 237));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Geral"));
@@ -77,7 +83,7 @@ public class DlgCadOS extends javax.swing.JDialog {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedro", "Jean", "Gabriel", "Rafael", "Matheus", "Gustavo" }));
+        cmbFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedro", "Jean", "Gabriel", "Rafael", "Matheus", "Gustavo" }));
 
         jLabel3.setText("Responsável");
 
@@ -98,7 +104,7 @@ public class DlgCadOS extends javax.swing.JDialog {
 
         jLabel1.setText("Serviço");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Troca de Bateria", "Troca de Pneu", "Reparo Lataria" }));
+        cmbServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Troca de Bateria", "Troca de Pneu", "Reparo Lataria" }));
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/24x24/add.png"))); // NOI18N
         btnAdicionar.setText("Adicionar");
@@ -133,16 +139,16 @@ public class DlgCadOS extends javax.swing.JDialog {
                                 .addGap(176, 176, 176)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cmbServico, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(5, Short.MAX_VALUE))
+                        .addContainerGap(2, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdicionar))))
         );
@@ -173,20 +179,28 @@ public class DlgCadOS extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdicionar))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(200, 150));
         jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 150));
+
+        jTable1.setModel(modeloTableItem);
+        jScrollPane2.setViewportView(jTable1);
+
         jPanel2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel2);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações Adicionais"));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(100, 37));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(72, 100));
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -210,7 +224,7 @@ public class DlgCadOS extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(86, 86, 86))
         );
@@ -249,18 +263,24 @@ public class DlgCadOS extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        GerInterGrafica.getInstance().carregarCombo(Funcionario.class, cmbFuncionario);
+        GerInterGrafica.getInstance().carregarCombo(Servico.class, cmbServico);
+    }//GEN-LAST:event_formComponentShown
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JComboBox<String> cmbFuncionario;
+    private javax.swing.JComboBox<String> cmbServico;
     private javax.swing.ButtonGroup grpDesconto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -273,6 +293,7 @@ public class DlgCadOS extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextField txtPlaca;

@@ -52,7 +52,6 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
             }
         });
 
-        tblClientes.setModel(cliTableModel);
         jScrollPane1.setViewportView(tblClientes);
 
         btnSelecionar.setText("Selecionar");
