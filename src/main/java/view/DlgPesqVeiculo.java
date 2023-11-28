@@ -5,6 +5,7 @@
 package view;
 
 import controller.GerInterGrafica;
+import controller.VeiculoTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Veiculo;
@@ -137,6 +138,7 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int linha = tblClientes.getSelectedRow();
         
+        /*
         if ( linha >= 0) {
             try {
                 // EXCLUIR
@@ -153,24 +155,28 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "ERRO excluir", JOptionPane.ERROR_MESSAGE);
         }
+        */
         
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         int linha = tblClientes.getSelectedRow();
-        
+        /*
         if ( linha >= 0) {
             cliSelecionado = cliTableModel.getCliente(linha);
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "ERRO excluir", JOptionPane.ERROR_MESSAGE);
         }
+        */
                 
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        /*
         cliSelecionado = null;                
         this.setVisible(false);
+        */
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -203,6 +209,7 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 DlgPesqVeiculo dialog = new DlgPesqVeiculo(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

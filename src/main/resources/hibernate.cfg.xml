@@ -17,5 +17,6 @@
     <mapping class="model.Status"></mapping>
     <mapping class="model.Funcionario"></mapping>
     <mapping class="model.Servico"></mapping>
+    <mapping class="model.ItemOrdem"></mapping>
   </session-factory>
 </hibernate-configuration>

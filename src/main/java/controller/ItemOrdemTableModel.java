@@ -1,7 +1,7 @@
 package controller;
 
 
-import model.Servico;
+import model.ItemOrdem;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ItemOrdemTableModel extends AbstractTableModel {
 
-    private List<Servico> lista = new ArrayList();
+    private List<ItemOrdem> lista = new ArrayList();
     
     @Override
     public int getRowCount() {
@@ -26,16 +26,15 @@ public class ItemOrdemTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 2;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-         Servico item = lista.get(rowIndex);
+         ItemOrdem item = lista.get(rowIndex);
         return switch (columnIndex) {
-            case 0 -> item.getNome();
-            case 1 -> item.getHorario();
-            case 2 -> item.getValor();
+            case 0 -> item.getServico().getNome();
+            case 1 -> item.getFuncionario().getNome();
             default -> "";
         };
          
@@ -44,14 +43,13 @@ public class ItemOrdemTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex ) {
         return switch (columnIndex) {
-            case 0 -> "Nome";
-            case 1 -> "Duração";
-            case 2 -> "Valor";
+            case 0 -> "Serviço";
+            case 1 -> "Responsável";
             default -> "";
         };        
     }
     
-    public void adicionar(Servico item) {
+    public void adicionar(ItemOrdem item) {
         lista.add(item);
         fireTableRowsInserted( lista.size() - 1 , lista.size() - 1);
     }
@@ -66,12 +64,12 @@ public class ItemOrdemTableModel extends AbstractTableModel {
         fireTableRowsDeleted(lista.size() - 1 , lista.size() - 1);
     }
         
-    public void setList(List<Servico> novaLista) {
+    public void setList(List<ItemOrdem> novaLista) {
         lista = novaLista;
         fireTableRowsInserted( 0 , lista.size() - 1);
     }
     
-    public List<Servico> getList() {
+    public List<ItemOrdem> getList() {
         return lista;
     }
 }

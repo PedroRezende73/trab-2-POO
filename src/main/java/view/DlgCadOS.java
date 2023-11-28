@@ -5,6 +5,7 @@
 package view;
 
 import controller.GerInterGrafica;
+import controller.ItemOrdemTableModel;
 import java.text.ParseException;
 import javax.swing.JOptionPane;
 import model.Veiculo;
@@ -20,6 +21,7 @@ public class DlgCadOS extends javax.swing.JDialog {
      */
     
     private Veiculo veiSelecionado = null;
+    private ItemOrdemTableModel modeloTableItem = new ItemOrdemTableModel();
     public DlgCadOS(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -243,7 +245,7 @@ public class DlgCadOS extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-
+        
         
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
