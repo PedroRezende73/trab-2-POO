@@ -6,6 +6,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.hibernate.annotations.Type;
 
 /**
@@ -53,12 +55,8 @@ public class OrdemServico implements Serializable {
     @JoinColumn ( name = "idFuncionario")
     private Funcionario funcionario;
     
-    @ManyToMany
-    @JoinTable ( name="Ordem_Servico", 
-                 joinColumns = { @JoinColumn(name="idOrdem") } ,
-                 inverseJoinColumns = { @JoinColumn(name="idServico") }
-                )
-    private List<Servico> listaServicos;
+    @OneToMany (mappedBy = "ordem", cascade = CascadeType.ALL)
+    List<ItemOrdem> itensOrdem;
 
     public OrdemServico() {
     }
