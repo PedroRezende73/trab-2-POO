@@ -6,6 +6,7 @@ package view;
 
 import controller.GerInterGrafica;
 import controller.ItemOrdemTableModel;
+import javax.swing.JOptionPane;
 import model.Funcionario;
 import model.ItemOrdem;
 import model.Servico;
@@ -45,7 +46,7 @@ public class DlgCadOS extends javax.swing.JDialog {
         cmbFuncionario = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -56,7 +57,7 @@ public class DlgCadOS extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtObs = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -93,9 +94,11 @@ public class DlgCadOS extends javax.swing.JDialog {
         jLabel5.setText("Desconto");
 
         grpDesconto.add(jRadioButton1);
+        jRadioButton1.setMnemonic('S');
         jRadioButton1.setText("Sim");
 
         grpDesconto.add(jRadioButton2);
+        jRadioButton2.setMnemonic('N');
         jRadioButton2.setText("Não");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +141,7 @@ public class DlgCadOS extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(176, 176, 176)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +176,7 @@ public class DlgCadOS extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton1)
                             .addComponent(jRadioButton2)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -203,7 +206,7 @@ public class DlgCadOS extends javax.swing.JDialog {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações Adicionais"));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(100, 37));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(72, 150));
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtObs);
 
         getContentPane().add(jScrollPane1);
 
@@ -244,12 +247,18 @@ public class DlgCadOS extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if ( veiSelecionado == null ) {
+            JOptionPane.showMessageDialog(this,"Selecione um veículo.", "Erro OS", JOptionPane.ERROR_MESSAGE);
+        } else if ( modeloTableItem.getRowCount() == 0 ) {
+            JOptionPane.showMessageDialog(this,"Escolha um lanche.", "Erro OS", JOptionPane.ERROR_MESSAGE);
+        } else {
+            char desconto = (char) grpDesconto.getSelection().getMnemonic();
+            String valor = txtValor.getText();
+            String obs = txtObs.getText();
+            int id = GerInterGrafica.getInstance().getGerDom().inserirOS(veiSelecionado, desconto, valor, obs, modeloTableItem.getList() );
+            JOptionPane.showMessageDialog(this,"Pedido " + id + " inserido com sucesso.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -272,6 +281,10 @@ public class DlgCadOS extends javax.swing.JDialog {
         GerInterGrafica.getInstance().carregarCombo(Funcionario.class, cmbFuncionario);
         GerInterGrafica.getInstance().carregarCombo(Servico.class, cmbServico);
     }//GEN-LAST:event_formComponentShown
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,8 +311,8 @@ public class DlgCadOS extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane txtObs;
     private javax.swing.JTextField txtPlaca;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

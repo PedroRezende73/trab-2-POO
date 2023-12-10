@@ -7,9 +7,12 @@ package controller;
 import dao.ConexaoHibernate;
 import dao.GenericDAO;
 import dao.VeiculoDAO;
+import java.util.Date;
 import java.util.List;
 import model.Veiculo;
 import model.Funcionario;
+import model.ItemOrdem;
+import model.OrdemServico;
 import model.Servico;
 import model.Status;
 import org.hibernate.HibernateException;
@@ -56,6 +59,24 @@ public class GerenciadorDominio {
     public int inserirStatus(Status sta) {
         genDAO.inserir(sta);
         return sta.getIdStatus();
+    }
+    
+    public int inserirOS(Veiculo vei, char desconto, String valor, String obs, List<ItemOrdem> lista) {
+        float valorDesconto = Float.parseFloat(valor);
+        boolean descontoOS = desconto == 'S';
+        
+        OrdemServico os = new OrdemServico(descontoOS, valorDesconto, obs, vei);
+        os.setItensOrdem(lista);
+        
+        float total = 0;
+        for ( ItemOrdem item : lista ) {
+            float subTotal = item.getServico().getValor();
+            total = total + subTotal;
+        }
+        
+        os.setValorTotal(total);
+        genDAO.inserir(os);
+        return os.getIdOS();
     }
     
     public List<Veiculo> pesquisarVeiculo(String pesq, int tipo) throws HibernateException {

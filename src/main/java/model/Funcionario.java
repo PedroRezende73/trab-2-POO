@@ -46,9 +46,6 @@ public class Funcionario implements Serializable{
             
     @Column
     private String complemento;
-    
-    @OneToMany ( mappedBy = "funcionario")
-    List<OrdemServico> ordens = new ArrayList();
 
     public Funcionario() {
     }

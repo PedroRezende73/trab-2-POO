@@ -38,7 +38,7 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
         txtPesq = new javax.swing.JTextField();
         btnPesq = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblClientes = new javax.swing.JTable();
+        tblVeiculos = new javax.swing.JTable();
         btnSelecionar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -52,7 +52,8 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
             }
         });
 
-        jScrollPane1.setViewportView(tblClientes);
+        tblVeiculos.setModel(veiTableModel);
+        jScrollPane1.setViewportView(tblVeiculos);
 
         btnSelecionar.setText("Selecionar");
         btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
@@ -135,17 +136,16 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPesqActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linha = tblClientes.getSelectedRow();
+        int linha = tblVeiculos.getSelectedRow();
         
-        /*
         if ( linha >= 0) {
             try {
                 // EXCLUIR
-                Cliente cli = cliTableModel.getCliente(linha);
-                if ( JOptionPane.showConfirmDialog(this,"Deseja excluir o cliente " + cli.getNome() + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION ) {             
+                Veiculo vei = veiTableModel.getVeiculo(linha);
+                if ( JOptionPane.showConfirmDialog(this,"Deseja excluir o cliente " + vei.getPlaca() + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION ) {             
                     
-                    GerInterGrafica.getInstance().getGerDom().excluir(cli);
-                    cliTableModel.remover(linha);
+                    GerInterGrafica.getInstance().getGerDom().excluir(vei);
+                    veiTableModel.remover(linha);
                 }
             } catch (HibernateException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO excluir", JOptionPane.ERROR_MESSAGE);
@@ -154,21 +154,17 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "ERRO excluir", JOptionPane.ERROR_MESSAGE);
         }
-        */
-        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-        int linha = tblClientes.getSelectedRow();
-        /*
+        int linha = tblVeiculos.getSelectedRow();
+        
         if ( linha >= 0) {
-            cliSelecionado = cliTableModel.getCliente(linha);
+            veiSelecionado = veiTableModel.getVeiculo(linha);
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "ERRO excluir", JOptionPane.ERROR_MESSAGE);
         }
-        */
-                
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -178,50 +174,6 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
         */
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DlgPesqVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DlgPesqVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DlgPesqVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DlgPesqVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DlgPesqVeiculo dialog = new DlgPesqVeiculo(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
@@ -229,7 +181,7 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
     private javax.swing.JButton btnSelecionar;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblClientes;
+    private javax.swing.JTable tblVeiculos;
     private javax.swing.JTextField txtPesq;
     // End of variables declaration//GEN-END:variables
 }
