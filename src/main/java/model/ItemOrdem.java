@@ -34,7 +34,7 @@ public class ItemOrdem implements Serializable {
     @ManyToOne
     @JoinColumn ( name="idFuncionario" )
     private Funcionario funcionario;
-    
+
     public ItemOrdem() {
     }
 

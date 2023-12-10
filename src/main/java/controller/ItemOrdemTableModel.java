@@ -26,7 +26,7 @@ public class ItemOrdemTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -35,6 +35,7 @@ public class ItemOrdemTableModel extends AbstractTableModel {
         return switch (columnIndex) {
             case 0 -> item.getServico().getNome();
             case 1 -> item.getFuncionario().getNome();
+            case 2 -> item.getServico().getValor();
             default -> "";
         };
          
@@ -45,6 +46,7 @@ public class ItemOrdemTableModel extends AbstractTableModel {
         return switch (columnIndex) {
             case 0 -> "Serviço";
             case 1 -> "Responsável";
+            case 2 -> "Valor";
             default -> "";
         };        
     }

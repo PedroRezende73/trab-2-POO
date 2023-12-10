@@ -71,10 +71,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Nome"/>
-            <StringItem index="1" value="CPF"/>
-            <StringItem index="2" value="Bairro"/>
-            <StringItem index="3" value="M&#xea;s"/>
+            <StringItem index="0" value="Placa"/>
+            <StringItem index="1" value="Condutor"/>
+            <StringItem index="2" value="Marca"/>
+            <StringItem index="3" value="Modelo"/>
           </StringArray>
         </Property>
       </Properties>

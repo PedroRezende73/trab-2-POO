@@ -74,7 +74,7 @@ public class DlgCadOS extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Geral"));
         jPanel1.setToolTipText("");
         jPanel1.setMinimumSize(new java.awt.Dimension(0, 200));
-        jPanel1.setPreferredSize(new java.awt.Dimension(600, 150));
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 150));
 
         jLabel2.setText("Veículo");
 
@@ -96,6 +96,11 @@ public class DlgCadOS extends javax.swing.JDialog {
         grpDesconto.add(jRadioButton1);
         jRadioButton1.setMnemonic('S');
         jRadioButton1.setText("Sim");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         grpDesconto.add(jRadioButton2);
         jRadioButton2.setMnemonic('N');
@@ -220,6 +225,11 @@ public class DlgCadOS extends javax.swing.JDialog {
         });
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -257,7 +267,7 @@ public class DlgCadOS extends javax.swing.JDialog {
             String valor = txtValor.getText();
             String obs = txtObs.getText();
             int id = GerInterGrafica.getInstance().getGerDom().inserirOS(veiSelecionado, desconto, valor, obs, modeloTableItem.getList() );
-            JOptionPane.showMessageDialog(this,"Pedido " + id + " inserido com sucesso.");
+            JOptionPane.showMessageDialog(this,"Ordem " + id + " inserido com sucesso.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -283,8 +293,17 @@ public class DlgCadOS extends javax.swing.JDialog {
     }//GEN-LAST:event_formComponentShown
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
+        txtValor.setVisible(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        modeloTableItem.removeAll();
+        veiSelecionado = null;
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        txtValor.setVisible(true);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**
      * @param args the command line arguments

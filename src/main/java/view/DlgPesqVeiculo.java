@@ -43,7 +43,7 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
         btnExcluir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "Bairro", "Mês" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Placa", "Condutor", "Marca", "Modelo" }));
 
         btnPesq.setText("Pesquisar");
         btnPesq.addActionListener(new java.awt.event.ActionListener() {
@@ -168,10 +168,8 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /*
-        cliSelecionado = null;                
+        veiSelecionado = null;                
         this.setVisible(false);
-        */
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

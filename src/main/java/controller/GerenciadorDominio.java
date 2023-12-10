@@ -7,7 +7,6 @@ package controller;
 import dao.ConexaoHibernate;
 import dao.GenericDAO;
 import dao.VeiculoDAO;
-import java.util.Date;
 import java.util.List;
 import model.Veiculo;
 import model.Funcionario;
@@ -62,9 +61,11 @@ public class GerenciadorDominio {
     }
     
     public int inserirOS(Veiculo vei, char desconto, String valor, String obs, List<ItemOrdem> lista) {
-        float valorDesconto = Float.parseFloat(valor);
         boolean descontoOS = desconto == 'S';
-        
+        float valorDesconto = 0;
+        if(desconto == 'S'){
+            valorDesconto = Float.parseFloat(valor);
+        }
         OrdemServico os = new OrdemServico(descontoOS, valorDesconto, obs, vei);
         os.setItensOrdem(lista);
         
@@ -72,6 +73,10 @@ public class GerenciadorDominio {
         for ( ItemOrdem item : lista ) {
             float subTotal = item.getServico().getValor();
             total = total + subTotal;
+        }
+        
+        if(descontoOS){
+            total = total - valorDesconto;
         }
         
         os.setValorTotal(total);
@@ -88,5 +93,17 @@ public class GerenciadorDominio {
             case 3: lista = veiDAO.pesquisarModelo(pesq); break;
         }
         return lista;        
+    }
+
+    public String alterarVeiculo(Veiculo vei, String placa, String nome, String cpf, String marca, String modelo, String cor) {
+        vei.setPlaca(placa);
+        vei.setNomeCondutor(nome);
+        vei.setCpfCondutor(cpf);
+        vei.setMarca(marca);
+        vei.setModelo(modelo);
+        vei.setCor(cor);
+        
+        genDAO.alterar(vei);
+        return vei.getPlaca();
     }
 }

@@ -14,9 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.Type;
@@ -87,6 +85,5 @@ public class OrdemServico implements Serializable {
     public int getIdOS() {
         return this.idOrdem;
     }
-    
     
 }

@@ -39,13 +39,6 @@ public class Servico implements Serializable {
     @Column
     private float valor;
     
-    @ManyToMany
-    @JoinTable ( name="Ordem_Servico", 
-                 joinColumns = { @JoinColumn(name="idServico") } ,
-                 inverseJoinColumns = { @JoinColumn(name="idOrdem") }
-                )
-    private List<OrdemServico> listaOrdens;
-
     public Servico() {
     }
 

@@ -5,14 +5,20 @@
 package view;
 
 import controller.GerInterGrafica;
+import java.text.ParseException;
+import java.util.Date;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import model.Veiculo;
+import org.hibernate.HibernateException;
 
 /**
  *
  * @author Usuario
  */
 public class DlgCadVeiculo extends javax.swing.JDialog {
+    
+    Veiculo veiSelecionado = null;
 
     /**
      * Creates new form DlgCadCarro
@@ -20,6 +26,7 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
     public DlgCadVeiculo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        habilitarBotoes();
     }
 
     /**
@@ -40,6 +47,7 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
         txtTelefone = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -50,8 +58,9 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         txtCor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Veículo");
@@ -81,6 +90,13 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
 
         jLabel4.setText("E-mail");
 
+        jButton3.setText("Pesquisar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,10 +105,13 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3))
                     .addComponent(jLabel3)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,8 +131,9 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
@@ -183,10 +203,10 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
 
         jPanel3.setPreferredSize(new java.awt.Dimension(475, 50));
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -197,14 +217,23 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
             }
         });
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addComponent(btnSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(btnAlterar)
+                .addGap(44, 44, 44)
                 .addComponent(jButton2)
                 .addGap(86, 86, 86))
         );
@@ -213,8 +242,9 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnSalvar)
+                    .addComponent(jButton2)
+                    .addComponent(btnAlterar))
                 .addGap(33, 33, 33))
         );
 
@@ -223,7 +253,7 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
         String placa = txtPlaca.getText();
         String nome = txtNome.getText();
@@ -235,28 +265,68 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
         GerInterGrafica.getInstance().getGerDom().inserirVeiculo(vei);
         JOptionPane.showMessageDialog(this,"Veículo da placa "+ placa +" inserido com sucesso.");
         limpaCampos();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         limpaCampos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        veiSelecionado = GerInterGrafica.getInstance().abrirJanPesqVeiculo();
+        if ( veiSelecionado != null ) {
+            txtPlaca.setText( veiSelecionado.getPlaca());
+            txtNome.setText(veiSelecionado.getNomeCondutor());
+            txtCpf.setText(veiSelecionado.getCpfCondutor());
+            txtMarca.setText(veiSelecionado.getMarca());
+            txtModelo.setText(veiSelecionado.getModelo());
+            txtCor.setText(veiSelecionado.getCor());
+        }
+        habilitarBotoes();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+        String placa = txtPlaca.getText();
+        String nome = txtNome.getText();
+        String cpf = txtCpf.getText();
+        String marca = txtMarca.getText();
+        String modelo = txtModelo.getText();
+        String cor = txtCor.getText();
+        
+        String placaVeiculo = GerInterGrafica.getInstance().getGerDom().alterarVeiculo(veiSelecionado, placa, nome, 
+            cpf, marca, modelo, cor);
+
+        JOptionPane.showMessageDialog(this, "Veículo " + placaVeiculo + " alterado com sucesso." );
+
+            
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
     private void limpaCampos(){
+        veiSelecionado = null;
         txtPlaca.setText("");
         txtNome.setText("");
         txtCpf.setText("");
         txtMarca.setText("");
         txtModelo.setText("");
         txtCor.setText("");
+        habilitarBotoes();
+    }
+    
+    private void habilitarBotoes() {
+        btnSalvar.setVisible(veiSelecionado == null);
+        btnAlterar.setVisible(veiSelecionado != null); 
+        txtPlaca.setEditable(veiSelecionado == null);
     }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

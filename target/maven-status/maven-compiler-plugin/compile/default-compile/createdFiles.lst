@@ -4,6 +4,7 @@ view\DlgCadVeiculo.class
 controller\VeiculoTableModel.class
 view\DlgPesqVeiculo$4.class
 view\DlgCadFuncionario$1.class
+view\DlgCadOS$5.class
 view\DlgCadServico$1.class
 view\DlgCadFuncionario$2.class
 view\DlgCadServico$2.class
@@ -23,6 +24,7 @@ controller\ItemOrdemTableModel.class
 view\FrmPrincipal$4.class
 controller\GerenciadorDominio.class
 model\Veiculo.class
+view\DlgCadVeiculo$3.class
 dao\GenericDAO.class
 view\DlgCadServico.class
 view\DlgCadOS$4.class
@@ -36,9 +38,7 @@ model\ItemOrdem.class
 view\DlgPesqVeiculo$1.class
 view\FrmPrincipal$3.class
 view\DlgPesqVeiculo.class
-view\DlgPesqVeiculo$5$1.class
 view\DlgPesqVeiculo$3.class
 view\FrmPrincipal$5.class
-view\DlgPesqVeiculo$5.class
 model\Funcionario.class
 view\FrmPrincipal$1.class
