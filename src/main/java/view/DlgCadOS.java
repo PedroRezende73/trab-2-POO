@@ -268,7 +268,7 @@ public class DlgCadOS extends javax.swing.JDialog {
             String valor = txtValor.getText();
             String obs = txtObs.getText();
             int id = GerInterGrafica.getInstance().getGerDom().inserirOS(veiSelecionado, desconto, valor, obs, modeloTableItem.getList() );
-            JOptionPane.showMessageDialog(this,"Ordem " + id + " inserido com sucesso.");
+            JOptionPane.showMessageDialog(this,"Ordem " + id + " inserida com sucesso.");
             limpaCampos();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
