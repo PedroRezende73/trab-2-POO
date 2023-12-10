@@ -63,7 +63,7 @@ public class GerenciadorDominio {
     public int inserirOS(Veiculo vei, char desconto, String valor, String obs, List<ItemOrdem> lista) {
         boolean descontoOS = desconto == 'S';
         float valorDesconto = 0;
-        if(desconto == 'S'){
+        if(desconto == 'S' && valor != ""){
             valorDesconto = Float.parseFloat(valor);
         }
         OrdemServico os = new OrdemServico(descontoOS, valorDesconto, obs, vei);
@@ -71,6 +71,8 @@ public class GerenciadorDominio {
         
         float total = 0;
         for ( ItemOrdem item : lista ) {
+            item.setOs(os);
+
             float subTotal = item.getServico().getValor();
             total = total + subTotal;
         }

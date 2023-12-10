@@ -34,6 +34,10 @@ public class ItemOrdem implements Serializable {
     @ManyToOne
     @JoinColumn ( name="idFuncionario" )
     private Funcionario funcionario;
+        
+    @ManyToOne
+    @JoinColumn ( name="idOrdem" )
+    private OrdemServico os;
 
     public ItemOrdem() {
     }
@@ -43,10 +47,10 @@ public class ItemOrdem implements Serializable {
         this.funcionario = funcionario;
     }
 
-    public ItemOrdem(int idItemOrdem, Servico servico, Funcionario funcionario) {
-        this.idItemOrdem = idItemOrdem;
+    public ItemOrdem(Servico servico, Funcionario funcionario, OrdemServico os) {
         this.servico = servico;
         this.funcionario = funcionario;
+        this.os = os;
     }
 
     public int getIdItemOrdem() {
@@ -72,5 +76,15 @@ public class ItemOrdem implements Serializable {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+
+    public OrdemServico getOs() {
+        return os;
+    }
+
+    public void setOs(OrdemServico os) {
+        this.os = os;
+    }
+    
+    
     
 }

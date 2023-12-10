@@ -27,6 +27,7 @@ public class DlgCadOS extends javax.swing.JDialog {
     public DlgCadOS(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        //txtValor.setVisible(grpDesconto.getSelection().getMnemonic() == 'S');
     }
 
     /**
@@ -268,6 +269,7 @@ public class DlgCadOS extends javax.swing.JDialog {
             String obs = txtObs.getText();
             int id = GerInterGrafica.getInstance().getGerDom().inserirOS(veiSelecionado, desconto, valor, obs, modeloTableItem.getList() );
             JOptionPane.showMessageDialog(this,"Ordem " + id + " inserido com sucesso.");
+            limpaCampos();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -297,14 +299,21 @@ public class DlgCadOS extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        modeloTableItem.removeAll();
-        veiSelecionado = null;
+        limpaCampos();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         txtValor.setVisible(true);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void limpaCampos(){
+        modeloTableItem.removeAll();
+        veiSelecionado = null;
+        txtPlaca.setText("");
+        grpDesconto.clearSelection();
+        txtValor.setText("");
+        txtObs.setText("");
+    }
     /**
      * @param args the command line arguments
      */
