@@ -23,6 +23,7 @@ public class DlgPesqVeiculo extends javax.swing.JDialog {
     public DlgPesqVeiculo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

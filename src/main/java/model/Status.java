@@ -51,5 +51,9 @@ public class Status implements Serializable{
         return nome;
     }
     
+    @Override
+    public String toString(){
+        return nome;
+    }
     
 }

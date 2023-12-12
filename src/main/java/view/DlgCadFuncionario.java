@@ -20,6 +20,7 @@ public class DlgCadFuncionario extends javax.swing.JDialog {
     public DlgCadFuncionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -221,18 +222,22 @@ public class DlgCadFuncionario extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //String nome, String cpf, String telefone, String cep, String logradouro, String bairro, String complemento
-        String nome = txtNome.getText();
-        String cpf = txtCpf.getText();
-        String telefone = txtTelefone.getText();
-        String cep = txtCep.getText();
-        String logradouro = txtLogradouro.getText();
-        String bairro = txtBairro.getText();
-        String complemento = txtComplemento.getText();
-        Funcionario fun = new Funcionario(nome, cpf, telefone, cep, logradouro, bairro, complemento);
-        int idFunc = GerInterGrafica.getInstance().getGerDom().inserirFuncionario(fun);
-        JOptionPane.showMessageDialog(this,"Funcionário "+ idFunc +" inserido com sucesso.");
-        limpaCampos();
+        if(txtNome.getText().length() == 0){
+            JOptionPane.showMessageDialog(this,"Informe o nome do funcionário.", "Erro Veículo", JOptionPane.ERROR_MESSAGE);
+        }else{
+            String nome = txtNome.getText();
+            String cpf = txtCpf.getText();
+            String telefone = txtTelefone.getText();
+            String cep = txtCep.getText();
+            String logradouro = txtLogradouro.getText();
+            String bairro = txtBairro.getText();
+            String complemento = txtComplemento.getText();
+            Funcionario fun = new Funcionario(nome, cpf, telefone, cep, logradouro, bairro, complemento);
+            int idFunc = GerInterGrafica.getInstance().getGerDom().inserirFuncionario(fun);
+            JOptionPane.showMessageDialog(this,"Funcionário "+ idFunc +" inserido com sucesso.");
+            limpaCampos();
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

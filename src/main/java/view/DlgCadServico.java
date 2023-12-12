@@ -26,6 +26,7 @@ public class DlgCadServico extends javax.swing.JDialog {
     public DlgCadServico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -168,20 +169,25 @@ public class DlgCadServico extends javax.swing.JDialog {
         String duracao = txtDuracao.getText();
         String valor = txtValor.getText();
         
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date parsedDate = null;
-        try {
-            parsedDate = dateFormat.parse(duracao);
-        } catch (ParseException ex) {
-            Logger.getLogger(DlgCadServico.class.getName()).log(Level.SEVERE, null, ex);
+        if(nome.length() == 0 || valor.length() == 0){
+            JOptionPane.showMessageDialog(this,"Informe todos os dados para prosseguir.", "Erro Serviço", JOptionPane.ERROR_MESSAGE);
+        }else{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            Date parsedDate = null;
+            try {
+                parsedDate = dateFormat.parse(duracao);
+                Time timeValue = new Time(parsedDate.getTime());
+                float floatValue = Float.parseFloat(valor);
+
+                Servico ser = new Servico(nome, timeValue, floatValue);
+                int idServ = GerInterGrafica.getInstance().getGerDom().inserirServico(ser);
+                JOptionPane.showMessageDialog(this,"Serviço "+ idServ +" inserido com sucesso.");
+                limpaCampos();
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this,"Duração inválida.", "Erro Serviço", JOptionPane.ERROR_MESSAGE);
+                //Logger.getLogger(DlgCadServico.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        Time timeValue = new Time(parsedDate.getTime());
-        float floatValue = Float.parseFloat(valor);
-        
-        Servico ser = new Servico(nome, timeValue, floatValue);
-        int idServ = GerInterGrafica.getInstance().getGerDom().inserirServico(ser);
-        JOptionPane.showMessageDialog(this,"Serviço "+ idServ +" inserido com sucesso.");
-        limpaCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void limpaCampos(){

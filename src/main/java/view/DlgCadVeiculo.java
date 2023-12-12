@@ -27,6 +27,7 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         habilitarBotoes();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -255,16 +256,22 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        String placa = txtPlaca.getText();
-        String nome = txtNome.getText();
-        String cpf = txtCpf.getText();
-        String marca = txtMarca.getText();
-        String modelo = txtModelo.getText();
-        String cor = txtCor.getText();
-        Veiculo vei = new Veiculo(placa, nome, cpf, marca, modelo, cor);
-        GerInterGrafica.getInstance().getGerDom().inserirVeiculo(vei);
-        JOptionPane.showMessageDialog(this,"Veículo da placa "+ placa +" inserido com sucesso.");
-        limpaCampos();
+        if ( txtPlaca.getText().length() == 0 ) {
+            JOptionPane.showMessageDialog(this,"Informe a placa do veículo.", "Erro Veículo", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNome.getText().length() == 0){
+            JOptionPane.showMessageDialog(this,"Informe o nome do condutor.", "Erro Veículo", JOptionPane.ERROR_MESSAGE);
+        }else {
+            String placa = txtPlaca.getText();
+            String nome = txtNome.getText();
+            String cpf = txtCpf.getText();
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            String cor = txtCor.getText();
+            Veiculo vei = new Veiculo(placa, nome, cpf, marca, modelo, cor);
+            GerInterGrafica.getInstance().getGerDom().inserirVeiculo(vei);
+            JOptionPane.showMessageDialog(this,"Veículo da placa "+ placa +" inserido com sucesso.");
+            limpaCampos();
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -287,17 +294,21 @@ public class DlgCadVeiculo extends javax.swing.JDialog {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        String placa = txtPlaca.getText();
-        String nome = txtNome.getText();
-        String cpf = txtCpf.getText();
-        String marca = txtMarca.getText();
-        String modelo = txtModelo.getText();
-        String cor = txtCor.getText();
-        
-        String placaVeiculo = GerInterGrafica.getInstance().getGerDom().alterarVeiculo(veiSelecionado, placa, nome, 
-            cpf, marca, modelo, cor);
+        if (txtNome.getText().length() == 0){
+            JOptionPane.showMessageDialog(this,"Informe o nome do condutor.", "Erro Veículo", JOptionPane.ERROR_MESSAGE);
+        }else {
+            String placa = txtPlaca.getText();
+            String nome = txtNome.getText();
+            String cpf = txtCpf.getText();
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            String cor = txtCor.getText();
 
-        JOptionPane.showMessageDialog(this, "Veículo " + placaVeiculo + " alterado com sucesso." );
+            String placaVeiculo = GerInterGrafica.getInstance().getGerDom().alterarVeiculo(veiSelecionado, placa, nome, 
+                cpf, marca, modelo, cor);
+
+            JOptionPane.showMessageDialog(this, "Veículo " + placaVeiculo + " alterado com sucesso." );
+        }
 
             
     }//GEN-LAST:event_btnAlterarActionPerformed

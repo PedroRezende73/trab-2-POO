@@ -20,6 +20,7 @@ public class DlgCadStatus extends javax.swing.JDialog {
     public DlgCadStatus(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -119,10 +120,16 @@ public class DlgCadStatus extends javax.swing.JDialog {
         
         String nome = txtNome.getText();
         
-        Status sta = new Status(nome);
-        int idSta = GerInterGrafica.getInstance().getGerDom().inserirStatus(sta);
-        JOptionPane.showMessageDialog(this,"Status "+ idSta +" inserido com sucesso.");
-        limpaCampos();
+        if(nome == ""){
+            JOptionPane.showMessageDialog(this,"Informe o nome do status.", "Erro Status", JOptionPane.ERROR_MESSAGE);
+        }else{
+            Status sta = new Status(nome);
+            int idSta = GerInterGrafica.getInstance().getGerDom().inserirStatus(sta);
+            JOptionPane.showMessageDialog(this,"Status "+ idSta +" inserido com sucesso.");
+            limpaCampos();
+        }
+        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void limpaCampos(){

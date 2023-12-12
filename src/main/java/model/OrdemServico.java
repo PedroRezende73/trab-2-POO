@@ -56,18 +56,20 @@ public class OrdemServico implements Serializable {
     public OrdemServico() {
     }
 
-    public OrdemServico(int idOrdem, boolean desconto, float valor, String obs, Veiculo veiculo) {
+    public OrdemServico(int idOrdem, boolean desconto, float valor, String obs, Veiculo veiculo, Status status) {
         this.idOrdem = idOrdem;
         this.desconto = desconto;
         this.obs = obs;
         this.veiculo = veiculo;
+        this.status = status;
     }
 
-    public OrdemServico(boolean desconto, float valor, String obs, Veiculo veiculo) {
+    public OrdemServico(boolean desconto, float valor, String obs, Veiculo veiculo, Status status) {
         this.desconto = desconto;
         this.valor = valor;
         this.obs = obs;
         this.veiculo = veiculo;
+        this.status = status;
     }
     
     public List<ItemOrdem> getItensOrdem() {

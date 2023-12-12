@@ -60,13 +60,13 @@ public class GerenciadorDominio {
         return sta.getIdStatus();
     }
     
-    public int inserirOS(Veiculo vei, char desconto, String valor, String obs, List<ItemOrdem> lista) {
+    public int inserirOS(Veiculo vei, char desconto, String valor, String obs, Status status, List<ItemOrdem> lista) {
         boolean descontoOS = desconto == 'S';
         float valorDesconto = 0;
-        if(desconto == 'S' && valor != ""){
+        if(desconto == 'S' && valor.length() > 0){
             valorDesconto = Float.parseFloat(valor);
         }
-        OrdemServico os = new OrdemServico(descontoOS, valorDesconto, obs, vei);
+        OrdemServico os = new OrdemServico(descontoOS, valorDesconto, obs, vei, status);
         os.setItensOrdem(lista);
         
         float total = 0;
